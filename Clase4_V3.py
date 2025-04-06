@@ -54,7 +54,7 @@ def main():
     #probemos lo que llevamos programado
     while True:
         #TAREA HACER EL MENU
-        opcion = int(input("\nIngrese \n0 para salir, \n1 para ingresar nuevo paciente, \n2 ver Paciente\n\t--> ")) 
+        opcion = int(input("\nIngrese \n0 para salir, \n1 para ingresar nuevo paciente, \n2 ver Paciente, \n3 Ver numero de pacientes \t--> ")) 
         
         if opcion == 1:
             #ingreso pacientes
@@ -91,10 +91,20 @@ def main():
                 print("Servicio: " + p.verServicio()) 
             else:
                 print("No existe un paciente con esa cedula") 
-        elif opcion !=0:
-            continue 
+
+        elif opcion == 3:
+            # Ver número de pacientes en el sistema
+            if len(sis._Sistema__lista_pacientes) > 0:
+                sis.verNumeroPacientes()  # Si hay pacientes, muestra la cantidad
+            else:
+                print("No hay pacientes en el sistema.")  # Si no hay pacientes
+        elif opcion == 0:
+            # Salir del programa
+            break
         else:
-            break 
+            # Mensaje para opciones inválidas
+            print("Opción no válida. Por favor, ingrese una opción válida (0, 1, 2, 3).")
+
 
 #aca el python descubre cual es la funcion principal
 if __name__ == "__main__":
