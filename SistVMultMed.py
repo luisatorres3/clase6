@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 class Medicamento:
     def __init__(self):
         self.__nombre = "" 
@@ -49,6 +52,20 @@ class Mascota:
     def asignarLista_Medicamentos(self,n):
         self.__lista_medicamentos = n 
     
+    def asignarFecha(self,f):
+        # Aseguramos que la fecha sea un objeto datetime válido
+        try:
+            self.__fecha_ingreso = datetime.strptime(f, "%d/%m/%Y")
+        except ValueError:
+            print("Error: La fecha debe estar en el formato dd/mm/aaaa.")
+            self.__fecha_ingreso = None
+    def eliminarMedicamento(self, nombre_medicamento):
+        # Buscar el medicamento y eliminarlo si existe
+        for m in self.__lista_medicamentos:
+            if m.verNombre() == nombre_medicamento:
+                self.__lista_medicamentos.remove(m)
+                return True
+        return False  # Si no se encontró el medicamento
 class sistemaV:
     def __init__(self):
         self.__lista_mascotas = []
