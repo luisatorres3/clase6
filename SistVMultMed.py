@@ -67,6 +67,18 @@ class Mascota:
                 return True
         return False  # Si no se encontró el medicamento
 class sistemaV:
+
+    def __init__(self):
+        self.__lista_mascotas_caninos = {}  # Diccionario para caninos
+        self.__lista_mascotas_felinos = {}  # Diccionario para felinos
+    
+    def verificarExiste(self, historia):
+        # Verifica si la historia clínica existe en ambos diccionarios
+        for lista in [self.__lista_mascotas_caninos, self.__lista_mascotas_felinos]:
+            if historia in lista:
+                return True
+        return False
+    
     def __init__(self):
         self.__lista_mascotas = []
     
@@ -114,8 +126,9 @@ def main():
                        \n2- Ver fecha de ingreso 
                        \n3- Ver número de mascotas en el servicio 
                        \n4- Ver medicamentos que se están administrando
-                       \n5- Eliminar mascota 
-                       \n6- Salir 
+                       \n5- Eliminar mascota
+                       \n6- Eiminar medicamento 
+                       \n7- Salir 
                        \nUsted ingresó la opción: ''' ))
         if menu==1: # Ingresar una mascota 
             if servicio_hospitalario.verNumeroMascotas() >= 10:
@@ -183,7 +196,7 @@ def main():
             else:
                 print("No se ha podido eliminar la mascota")
         
-        elif menu==6:
+        elif menu== 7:
             print("Usted ha salido del sistema de servicio de hospitalización...")
             break
         
