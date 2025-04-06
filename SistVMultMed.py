@@ -59,6 +59,7 @@ class Mascota:
         except ValueError:
             print("Error: La fecha debe estar en el formato dd/mm/aaaa.")
             self.__fecha_ingreso = None
+            
     def eliminarMedicamento(self, nombre_medicamento):
         # Buscar el medicamento y eliminarlo si existe
         for m in self.__lista_medicamentos:
@@ -195,6 +196,17 @@ def main():
                 print("Mascota eliminada del sistema con exito")
             else:
                 print("No se ha podido eliminar la mascota")
+
+        elif menu == 6:  # Eliminar medicamento
+            historia = int(input("Ingrese la historia clínica de la mascota: "))
+            medicamento = input("Ingrese el nombre del medicamento a eliminar: ")
+            for lista in [servicio_hospitalario._sistemaV__lista_mascotas_caninos, servicio_hospitalario._sistemaV__lista_mascotas_felinos]:
+                if historia in lista:
+                    if lista[historia].eliminarMedicamento(medicamento):
+                        print("Medicamento eliminado con éxito.")
+                    else:
+                        print("No se encontró el medicamento.")
+        
         
         elif menu== 7:
             print("Usted ha salido del sistema de servicio de hospitalización...")
