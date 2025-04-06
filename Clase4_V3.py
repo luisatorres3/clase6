@@ -49,12 +49,29 @@ class Sistema:
     def verNumeroPacientes(self):
         print("En el sistema hay: " + str(len(self.__lista_pacientes)) + " pacientes") 
 
+    def buscarPacientePorNombreOCedula(self, busqueda):
+        pacientes_encontrados = []
+        
+        # Buscar por cédula (si la busqueda es un número entero)
+        try:
+            cedula = int(busqueda)
+            for p in self.__lista_pacientes:
+                if p.verCedula() == cedula:
+                    pacientes_encontrados.append(p)
+        except ValueError:
+            # Si no se puede convertir a entero, es porque la busqueda es un nombre
+            for p in self.__lista_pacientes:
+                if p.verNombre().lower().startswith(busqueda.lower()):
+                    pacientes_encontrados.append(p)
+        
+        return pacientes_encontrados
+
 def main():
     sis = Sistema() 
     #probemos lo que llevamos programado
     while True:
         #TAREA HACER EL MENU
-        opcion = int(input("\nIngrese \n0 para salir, \n1 para ingresar nuevo paciente, \n2 ver Paciente, \n3 Ver numero de pacientes \t--> ")) 
+        opcion = int(input("\nIngrese \n0 para salir, \n1 para ingresar nuevo paciente, \n2 ver Paciente, \n3 Ver numero de pacientes, \n4 Ver datos de paciente mediente nombre o cedula \t--> ")) 
         
         if opcion == 1:
             #ingreso pacientes
@@ -98,6 +115,21 @@ def main():
                 sis.verNumeroPacientes()  # Si hay pacientes, muestra la cantidad
             else:
                 print("No hay pacientes en el sistema.")  # Si no hay pacientes
+        elif opcion == 4:
+            # Buscar paciente por cédula o nombre
+            busqueda = input("Ingrese la cedula o el nombre del paciente a buscar: ")
+            pacientes = sis.buscarPacientePorNombreOCedula(busqueda)
+            
+            if pacientes:
+                for p in pacientes:
+                    print("\nPaciente encontrado:")
+                    print("Nombre: " + p.verNombre()) 
+                    print("Cedula: " + str(p.verCedula())) 
+                    print("Genero: " + p.verGenero()) 
+                    print("Servicio: " + p.verServicio())
+            else:
+                print("No se encontró ningún paciente con esa cédula o nombre.")
+
         elif opcion == 0:
             # Salir del programa
             break
